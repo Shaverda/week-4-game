@@ -33,6 +33,11 @@ header {
 	height: 50px;
 	padding: 15px;
 }
+.alert-area {
+	display: inline;
+	margin-top: 300px;
+	padding-top: 300px;
+}
 
 footer {
 	margin-top: 50px;

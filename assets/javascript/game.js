@@ -22,8 +22,8 @@ var characters = {
 };
 
 
-var is_enemy_chosen = false;						//var to make you only allowed to choose one enemy
-var is_character_chosen = false;					//var to make you only allowed to choose one character
+var is_enemy_chosen = false;	//DOES THIS EVEN WORK BRO			//var to make you only allowed to choose one enemy
+var is_character_chosen = false;	//DOES THIS EVEN WORK BRO				//var to make you only allowed to choose one character
 
 function choose_enemy (is_enemy_chosen){	
 	$(".character-boxes").on("click", function(){
@@ -36,6 +36,7 @@ function choose_enemy (is_enemy_chosen){
 			else if ($(this).hasClass("death-knight")){		characters.DeathKnight["position"] = "defender";} 
 			else if ($(this).hasClass("mage")){				characters.Mage["position"] = "defender";}
 			else {											characters.Hunter["position"] = "defender";}
+			$(".alert-text").html("Now...fight!");
 		}					
 	})
 }
@@ -48,6 +49,8 @@ $(document).ready(function() {
 	document.querySelector(".mage_health_points").innerHTML = (characters.Mage.health_points);
 	document.querySelector(".hunter_health_points").innerHTML = (characters.Hunter.health_points);
 
+	$(".alert-text").html("Choose a character!");
+
 
 	$(".character-boxes").on("click", function() {
 		if (is_character_chosen == false){				//if you haven't chosen a char yet
@@ -58,6 +61,7 @@ $(document).ready(function() {
 			else if ($(this).hasClass("death-knight")){		characters.DeathKnight["position"] = "attacker";} 
 			else if ($(this).hasClass("mage")){				characters.Mage["position"] = "attacker";}
 			else {											characters.Hunter["position"] = "attacker";}
+			$(".alert-text").html("Choose an enemy!");
 		}
 		$(".character-boxes").each(function(){			//iterates through all possible character boxes,
 			if (this !== character_chosen){				//making sure that it's not the one you chose to fight	
@@ -84,6 +88,10 @@ $(document).ready(function() {
 			else if ($(".enemy-chosen").children().hasClass("death-knight")){	defender = characters.DeathKnight;}
 			else if ($(".enemy-chosen").children().hasClass("mage")){			defender = characters.Mage;}
 			else {																defender = characters.Hunter;}
+
+			if (defender.health_points < 0){
+				$(".alert-text").html("Bro. You already won. C'mon, why u still attack?");
+			}
 
 			defender.health_points -= attacker.attack_power;	//subtracts HP from defender based on attacker's ATK power
 			attacker.attack_power += attacker.base_attack_power;	//increases attacker's attack power based on their original base

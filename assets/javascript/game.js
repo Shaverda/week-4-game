@@ -2,18 +2,22 @@ var characters = {
 	"Rogue" : {
 		health_points: 150,
 		attack_power: 15,
+		base_attack_power: 15,
 		counter_attack: 10},
 	"DeathKnight" : {
 		health_points: 200,
 		attack_power: 7,
+		base_attack_power: 7,
 		counter_attack: 15}, 
 	"Mage" : {
 		health_points: 100,
 		attack_power: 15,
+		base_attack_power: 15,
 		counter_attack: 10}, 
 	"Hunter" : {
 		health_points: 125,
 		attack_power: 13,
+		base_attack_power: 13,
 		counter_attack: 13}
 };
 
@@ -28,7 +32,7 @@ function choose_enemy (is_enemy_chosen){
 			$(".enemy-chosen").append(this);			//moves enemy clicked on to defender area
 			is_enemy_chosen = true;						//ensures you can only choose 1 enemy
 
-			if ($(this).hasClass("rogue")){					characters.Rogue["position"] = "defender"; }
+			if ($(this).hasClass("rogue")){					characters.Rogue["position"] = "defender"; }	//CURRENTLY NO USE FOR ANY OF THIS
 			else if ($(this).hasClass("death-knight")){		characters.DeathKnight["position"] = "defender";} 
 			else if ($(this).hasClass("mage")){				characters.Mage["position"] = "defender";}
 			else {											characters.Hunter["position"] = "defender";}
@@ -50,7 +54,7 @@ $(document).ready(function() {
 			$(".character-chosen").append(this);		//adds char chosen/clicked on to character chosen div
 			is_character_chosen = true;					//means you've now chosen a character, can't choose more
 			character_chosen = this;					//iniates character chosen to whatever clicked on.
-			if ($(this).hasClass("rogue")){					characters.Rogue["position"] = "attacker"; }
+			if ($(this).hasClass("rogue")){					characters.Rogue["position"] = "attacker"; }	//CURRENTLY NO USE FOR ANY OF THIS
 			else if ($(this).hasClass("death-knight")){		characters.DeathKnight["position"] = "attacker";} 
 			else if ($(this).hasClass("mage")){				characters.Mage["position"] = "attacker";}
 			else {											characters.Hunter["position"] = "attacker";}
@@ -63,9 +67,28 @@ $(document).ready(function() {
 		});												//closing for .each func												
 	});													//closing for on click
 
-
+	
 	$("button").on("click", function(){
+
 		if (($(".enemy-chosen").children().length > 1 )&& ($(".character-chosen").children().length > 1 )){
+			var attacker;
+
+			if ($(".character-chosen").children().hasClass("rogue")){				attacker = characters.Rogue;}
+			else if ($(".character-chosen").children().hasClass("death-knight")){	attacker = characters.DeathKnight;}
+			else if ($(".character-chosen").children().hasClass("mage")){			attacker = characters.Mage;}
+			else {																attacker = characters.Hunter;}
+
+
+			var defender; 
+			if ($(".enemy-chosen").children().hasClass("rogue")){				defender = characters.Rogue;}
+			else if ($(".enemy-chosen").children().hasClass("death-knight")){	defender = characters.DeathKnight;}
+			else if ($(".enemy-chosen").children().hasClass("mage")){			defender = characters.Mage;}
+			else {																defender = characters.Hunter;}
+
+			defender.health_points -= attacker.attack_power;	//subtracts HP from defender based on attacker's ATK power
+			attacker.attack_power += attacker.base_attack_power;	//increases attacker's attack power based on their original base
+
+			$(".enemy-chosen").find(".hp").html(defender.health_points); 	//re-writes the HP portion from hp lost
 
 		}
 	});

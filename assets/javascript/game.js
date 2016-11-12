@@ -73,7 +73,6 @@ $(document).ready(function() {
 
 	
 	$("button").on("click", function(){
-
 		if (($(".enemy-chosen").children().length > 1 )&& ($(".character-chosen").children().length > 1 )){
 			var attacker;
 
@@ -84,19 +83,36 @@ $(document).ready(function() {
 
 
 			var defender; 
-			if ($(".enemy-chosen").children().hasClass("rogue")){				defender = characters.Rogue;}
-			else if ($(".enemy-chosen").children().hasClass("death-knight")){	defender = characters.DeathKnight;}
-			else if ($(".enemy-chosen").children().hasClass("mage")){			defender = characters.Mage;}
-			else {																defender = characters.Hunter;}
+			if ($(".enemy-chosen").children().hasClass("rogue")){				
+				defender = characters.Rogue;
+			}
+			else if ($(".enemy-chosen").children().hasClass("death-knight")){	
+				defender = characters.DeathKnight;
+			}
+			else if ($(".enemy-chosen").children().hasClass("mage")){			
+				defender = characters.Mage;
+			}
+			else {																
+				defender = characters.Hunter;
+			}
 
-			if (defender.health_points < 0){
+			if ((defender.health_points < 0) || ((defender.health_points -= attacker.attack_power) < 0)){
 				$(".alert-text").html("Bro. You already won. C'mon, why u still attack?");
+				$(".enemy-chosen .character-boxes").remove();	//deletes the character when they deaddddd
+				if ($(".enemies-available").children().length < 2){		//creates "you won!!!" text when there are no more enemies available
+					alert("YOU WOOOOOOOOOOOON YAY");
+				}
+				$(".alert-text").html("You won! Choose a new enemy!");
+
 			}
 
 			defender.health_points -= attacker.attack_power;	//subtracts HP from defender based on attacker's ATK power
+			attacker.health_points -= defender.counter_attack;	//subtracts hP from attacker based on defender counter attack;
 			attacker.attack_power += attacker.base_attack_power;	//increases attacker's attack power based on their original base
 
 			$(".enemy-chosen").find(".hp").html(defender.health_points); 	//re-writes the HP portion from hp lost
+			$(".character-chosen").find(".hp").html(attacker.health_points); 	//re-writes the HP portion from hp lost
+
 
 		}
 	});

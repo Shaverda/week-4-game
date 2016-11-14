@@ -20,43 +20,49 @@ tweak HP/defense/combat shtuff
 			<h2 class=".text-muted small"> Embrace your 15 year old self </h2>
 		</header>
 		<div class="container">
-			<div class="character-boxes rogue">
-				<p>Rogue</p>
-				<img src="assets/images/rogue.jpg" alt="Rogue character">
-				<p> HP: </p><p class ="hp rogue_health_points"></p>
-			</div>
-			<div class="character-boxes death-knight">
-				<p>Death Knight</p>
-				<img src="assets/images/death_knight.jpg" alt="Death Knight character">
-				<p> HP: </p><p class ="hp dk_health_points"></p>
-			</div>
-			<div class="character-boxes mage">
-				<p>Mage</p>
-				<img src="assets/images/mage.jpg" alt="Mage character">
-				<p> HP: </p><p class ="hp mage_health_points"></p>
-			</div>
-			<div class="character-boxes hunter">
-				<p>Hunter</p>
-				<img src="assets/images/hunter.jpg" alt="Hunter character">
-				<p> HP: </p><p class ="hp hunter_health_points"></p>
-			</div>
-			<div class="character-chosen">
-				<p>Your character!</p>
-			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="character-chosen">
+						<p>Attacker</p>
+					</div>
+					<div class="character-boxes rogue">
+						<p>Rogue</p>
+						<img src="assets/images/rogue.jpg" alt="Rogue character">
+						<p> HP: </p><p class ="hp rogue_health_points"></p>
+					</div>
+					<div class="character-boxes death-knight">
+						<p>Death Knight</p>
+						<img src="assets/images/death_knight.jpg" alt="Death Knight character">
+						<p> HP: </p><p class ="hp dk_health_points"></p>
+					</div>
+					<div class="character-boxes mage">
+						<p>Mage</p>
+						<img src="assets/images/mage.jpg" alt="Mage character">
+						<p> HP: </p><p class ="hp mage_health_points"></p>
+					</div>
+					<div class="character-boxes hunter">
+						<p>Hunter</p>
+						<img src="assets/images/hunter.jpg" alt="Hunter character">
+						<p> HP: </p><p class ="hp hunter_health_points"></p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="enemy-chosen">
+						<p> Defender </p>
+					</div>
+					<button type="button" class="btn btn-primary">Attack!</button>
+				</div>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="enemies-available">
 						<p>Enemies Available to Attack </p>
 					</div>
-					<button type="button" class="btn btn-primary">Attack!</button>
 					<br> <br>
-					<div class="enemy-chosen">
-						<p> Defender </p>
-					</div>
+					
 				</div>
 				<div class="col-md-6">
 					<div class="alert-area">
-						<h1 class="alert-text"></h1>
+						<p class="alert-text"></p>
 					</div>
 				</div>
 			</div>

@@ -21,7 +21,6 @@ var characters = {
 		counter_attack: 13}
 };
 
-//game currently lets u choose a new enemy even if ur attacker is dead
 
 var is_enemy_chosen = false;	//DOES THIS EVEN WORK BRO			//var to make you only allowed to choose one enemy
 var is_character_chosen = false;	//DOES THIS EVEN WORK BRO				//var to make you only allowed to choose one character
@@ -32,6 +31,11 @@ function choose_enemy (is_enemy_chosen){
 			enemy_chosen = this;						//sets var enemy_chosen to item clicked on
 			$(".enemy-chosen").append(this);			//moves enemy clicked on to defender area
 			is_enemy_chosen = true;						//ensures you can only choose 1 enemy
+
+			if ($(this).hasClass("rogue")){					characters.Rogue["position"] = "defender"; }	//CURRENTLY NO USE FOR ANY OF THIS
+			else if ($(this).hasClass("death-knight")){		characters.DeathKnight["position"] = "defender";} 
+			else if ($(this).hasClass("mage")){				characters.Mage["position"] = "defender";}
+			else {											characters.Hunter["position"] = "defender";}
 			$(".alert-text").html("Now...fight!");
 		}					
 	})
@@ -53,6 +57,10 @@ $(document).ready(function() {
 			$(".character-chosen").append(this);		//adds char chosen/clicked on to character chosen div
 			is_character_chosen = true;					//means you've now chosen a character, can't choose more
 			character_chosen = this;					//iniates character chosen to whatever clicked on.
+			if ($(this).hasClass("rogue")){					characters.Rogue["position"] = "attacker"; }	//CURRENTLY NO USE FOR ANY OF THIS
+			else if ($(this).hasClass("death-knight")){		characters.DeathKnight["position"] = "attacker";} 
+			else if ($(this).hasClass("mage")){				characters.Mage["position"] = "attacker";}
+			else {											characters.Hunter["position"] = "attacker";}
 			$(".alert-text").html("Choose an enemy!");
 		}
 		$(".character-boxes").each(function(){			//iterates through all possible character boxes,
@@ -68,37 +76,44 @@ $(document).ready(function() {
 		if (($(".enemy-chosen").children().length > 1 )&& ($(".character-chosen").children().length > 1 )){
 			var attacker;
 
-			if ($(".character-chosen .rogue")){				attacker = characters.Rogue;}
-			else if ($(".character-chosen .death-knight")){	attacker = characters.DeathKnight;}
-			else if ($(".character-chosen .mage")){			attacker = characters.Mage;}
-			else {											attacker = characters.Hunter;}
+			if ($(".character-chosen").children().hasClass("rogue")){				attacker = characters.Rogue;}
+			else if ($(".character-chosen").children().hasClass("death-knight")){	attacker = characters.DeathKnight;}
+			else if ($(".character-chosen").children().hasClass("mage")){			attacker = characters.Mage;}
+			else {																attacker = characters.Hunter;}
 
 
 			var defender; 
-			if ($(".enemy-chosen .rogue")){					defender = characters.Rogue;}
-			else if ($(".enemy-chosen .death-knight")){		defender = characters.DeathKnight;}
-			else if ($(".enemy-chosen .mage")){				defender = characters.Mage;}
-			else {											defender = characters.Hunter;}
-			if ((attacker.health_points > 0) && ((attacker.health_points -= defender.counter_attack)> 0)){ 	//only lets you keep attacking if attacker is not dead and if next enemy counter attack won't kill you
-				if ((defender.health_points <= 0) || ((defender.health_points -= attacker.attack_power) < 0)){
-					$(".alert-text").html("Bro. You already won. C'mon, why u still attack?");
-					$(".enemy-chosen .character-boxes").remove();	//deletes the character when they deaddddd
-					if ($(".enemies-available").children().length < 2){		//creates "you won!!!" text when there are no more enemies available
-						alert("YOU WOOOOOOOOOOOON YAY");
-					}
-					$(".alert-text").html("You won! Choose a new enemy!");
+			if ($(".enemy-chosen").children().hasClass("rogue")){				
+				defender = characters.Rogue;
+			}
+			else if ($(".enemy-chosen").children().hasClass("death-knight")){	
+				defender = characters.DeathKnight;
+			}
+			else if ($(".enemy-chosen").children().hasClass("mage")){			
+				defender = characters.Mage;
+			}
+			else {																
+				defender = characters.Hunter;
+			}
+
+			if ((defender.health_points < 0) || ((defender.health_points -= attacker.attack_power) < 0)){
+				$(".alert-text").html("Bro. You already won. C'mon, why u still attack?");
+				$(".enemy-chosen .character-boxes").remove();	//deletes the character when they deaddddd
+				if ($(".enemies-available").children().length < 2){		//creates "you won!!!" text when there are no more enemies available
+					alert("YOU WOOOOOOOOOOOON YAY");
 				}
+				$(".alert-text").html("You won! Choose a new enemy!");
 
-				defender.health_points -= attacker.attack_power;	//subtracts HP from defender based on attacker's ATK power
-				attacker.health_points -= defender.counter_attack;	//subtracts hP from attacker based on defender counter attack;
-				attacker.attack_power += attacker.base_attack_power;	//increases attacker's attack power based on their original base
+			}
 
-				$(".enemy-chosen .hp").html(defender.health_points); 	//re-writes the HP portion from hp lost	for defender
-				$(".character-chosen .hp").html(attacker.health_points); 	//re-writes the HP portion from hp lost for attacker
-			}
-			else {
-				$(".alert-text").html("You lost bro! Stop tryin' to make it happen, ya amateur!");
-			}
+			defender.health_points -= attacker.attack_power;	//subtracts HP from defender based on attacker's ATK power
+			attacker.health_points -= defender.counter_attack;	//subtracts hP from attacker based on defender counter attack;
+			attacker.attack_power += attacker.base_attack_power;	//increases attacker's attack power based on their original base
+
+			$(".enemy-chosen").find(".hp").html(defender.health_points); 	//re-writes the HP portion from hp lost
+			$(".character-chosen").find(".hp").html(attacker.health_points); 	//re-writes the HP portion from hp lost
+
+
 		}
 	});
 });														//document ready close

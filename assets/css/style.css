@@ -17,7 +17,13 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.chosenFont{
+	font-family: 'Caveat', Cursive, Helvetica, Arial, sans-serif;
+}
 
+h1 {
+	font-size: 2em;
+}
 
 .character-boxes img {
 	max-width: 150px;
@@ -44,7 +50,7 @@ header {
 	border-bottom: 2px solid #ccc;
 	width: 100%;
 	height: 50px;
-	padding: 30px 15px 50px 15px;
+	padding: 15px 15px 70px 15px;
 }
 .alert-area {
 	margin-top: 30px;

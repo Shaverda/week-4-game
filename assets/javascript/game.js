@@ -31,11 +31,6 @@ function choose_enemy (is_enemy_chosen){
 			enemy_chosen = this;						//sets var enemy_chosen to item clicked on
 			$(".enemy-chosen").append(this);			//moves enemy clicked on to defender area
 			is_enemy_chosen = true;						//ensures you can only choose 1 enemy
-
-			if ($(this).hasClass("rogue")){					characters.Rogue["position"] = "defender"; }	//CURRENTLY NO USE FOR ANY OF THIS
-			else if ($(this).hasClass("death-knight")){		characters.DeathKnight["position"] = "defender";} 
-			else if ($(this).hasClass("mage")){				characters.Mage["position"] = "defender";}
-			else {											characters.Hunter["position"] = "defender";}
 			$(".alert-text").html("Now...fight!");
 		}					
 	})
@@ -57,10 +52,6 @@ $(document).ready(function() {
 			$(".character-chosen").append(this);		//adds char chosen/clicked on to character chosen div
 			is_character_chosen = true;					//means you've now chosen a character, can't choose more
 			character_chosen = this;					//iniates character chosen to whatever clicked on.
-			if ($(this).hasClass("rogue")){					characters.Rogue["position"] = "attacker"; }	//CURRENTLY NO USE FOR ANY OF THIS
-			else if ($(this).hasClass("death-knight")){		characters.DeathKnight["position"] = "attacker";} 
-			else if ($(this).hasClass("mage")){				characters.Mage["position"] = "attacker";}
-			else {											characters.Hunter["position"] = "attacker";}
 			$(".alert-text").html("Choose an enemy!");
 		}
 		$(".character-boxes").each(function(){			//iterates through all possible character boxes,

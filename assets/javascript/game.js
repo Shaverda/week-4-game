@@ -20,7 +20,8 @@ var characters = {
 		base_attack_power: 13,
 		counter_attack: 13}
 };
-
+//game currently lets u choose a new enemy even if ur attacker is dead
+//also lets you de-select character chosen by click on it after enemy chosen
 
 var is_enemy_chosen = false;	//DOES THIS EVEN WORK BRO			//var to make you only allowed to choose one enemy
 var is_character_chosen = false;	//DOES THIS EVEN WORK BRO				//var to make you only allowed to choose one character

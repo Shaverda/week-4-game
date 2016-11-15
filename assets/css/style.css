@@ -13,7 +13,7 @@ html {
 }
 
 body {
-	background-image: url("../images/wow-opaque2.png");
+	background-image: url("../images/wow2.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -24,10 +24,23 @@ body {
 h1 {
 	font-size: 2em;
 }
+.enemies-available, .character-chosen, .enemy-chosen {
+	background-color: rgba(128, 128, 128, 0.8);
+	padding: 15px;
+	color: black;
+	border-radius: 15px;
+	text-align: center;
+	
+}
+
+.character-chosen, .enemy-chosen{
+	max-width: 200px;
+}
 
 .character-boxes img {
 	max-width: 150px;
 	max-height: 150px;
+
 }
 .enemies-available .character-boxes  img {
 	max-width: 100px;
@@ -35,12 +48,17 @@ h1 {
 
 }
 
-
+.btn {
+	margin: 15px;
+	padding: 15px;
+	font-size: 1.3em;
+}
 .character-boxes {
 	display: inline-block;
 	text-align: center;
 	border: 3px solid black;
 	border-radius: 15px;
+	background-color: rgba(255,255,255,.8);
 }
 
 header {
@@ -54,7 +72,11 @@ header {
 }
 .alert-area {
 	margin-top: 30px;
-	padding-top: 30px;
+	padding: 15px;
+	background-color: rgba(255,255,255,.8);
+	border: 3px solid black;
+	border-radius: 15px;
+	text-align: center;
 }
 
 footer {
@@ -64,4 +86,5 @@ footer {
     height: 50px;
     width: 100%;
     text-align: center;
+    clear: both;
 }
